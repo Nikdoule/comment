@@ -1,0 +1,29 @@
+.text-area{
+    border: none;
+}
+.box-area{
+    border-radius: 5px;
+    border: rgb(165, 165, 165) 2px solid;
+}
+.box-com{
+    box-shadow: 0px 1px 5px gray;
+    width: 500px;
+}
+.com{
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.445);
+}
+
+.text-input{
+    border: none;
+    width: 100%;
+}
+.author{
+    font-weight: 900;
+}
+.date{
+    font-size: 0.7rem;
+}
+.body{
+    font-weight: 100;
+}
