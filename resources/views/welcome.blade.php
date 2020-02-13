@@ -15,8 +15,8 @@
     </head>
     <body>
         <div id="app" class="d-flex justify-content-center">
-            
-        <comment-form :data-comments='{{ $comments }}'></comment-form>
+        <h1>{{ $title }}</h1>
+        <comment-form></comment-form>
            
         </div>
         <script src="/js/app.js"></script>

@@ -9,12 +9,11 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
-    public function index()
+    public function index($url)
     {
-        $comments = Comment::all();
-        return view('welcome',[
-            'comments' => $comments
-        ]);
+        $comments = Comment::where('url', base64_decode($url))->get();
+
+        return $comments;
 
     }
     public function store()
@@ -22,12 +21,14 @@ class CommentsController extends Controller
         request()->validate([
             'author' => ['required'],
             'body' => ['required'],
+            'url' => ['required'],
         ]);
 
         return Comment::create([
             'author' => request('author'),
-            'url' => 'url',
+            'url' => request('url'),
             'body' => request('body'),
+
         ]);
         
     }

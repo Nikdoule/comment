@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', 'CommentsController@index');
+
+Route::get('/page1', 'PageController@page1');
+Route::get('/page2', 'PageController@page2');
+
+Route::get('/comments/{url}', 'CommentsController@index');
 
 Route::post('/comments', 'CommentsController@store');

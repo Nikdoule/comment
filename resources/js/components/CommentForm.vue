@@ -8,18 +8,15 @@
       >
         <span class="author text-left">{{ comment.author }}</span>
         <span class="body">{{ comment.body }}</span>
-        <span class="date text-right">{{ comment.created_at }}</span>
+        <span class="date text-right">Il y a  {{ format(comment.created_at) }}</span>
       </span>
     </div>
     <form class="form-group" @submit.prevent="submitComment">
       <label for="exampleFormControlTextarea1"></label>
-      <div class="box-area mb-2">
-        <input class="text-input p-2" value v-model="form.author" placeholder="autheur" />
-      </div>
-      <h6 v-if="errors.author" style="color: red;">The comment is required</h6>
-      <div class="box-area mt-2 mb-2">
+        <input class="text-input p-2 box-area mb-2" :class="{'border border-danger' : errors.author}" value v-model="form.author" placeholder="autheur" />
+      <h6 v-if="errors.author" style="color: red;" class="ml-2">The Author is required</h6>
         <textarea
-          class="text-area p-2"
+          class="text-area p-2 mt-2 mb-2 box-area" :class="{'border border-danger' : errors.body }"
           v-model="form.body"
           name
           id
@@ -27,28 +24,33 @@
           rows="1"
           placeholder="Ton commentaire"
         ></textarea>
-      </div>
-      <h6 v-if="errors.body" style="color: red;">The comment is required</h6>
+      <h6 v-if="errors.body" style="color: red;" class="ml-2">The comment is required</h6>
       <button type="submit" class="btn btn-success btn-lg btn-block">Envoyer</button>
     </form>
   </div>
 </template>
 
 <script>
+import { format, formatDistance, formatRelative, subHours } from 'date-fns'
+import { fr } from 'date-fns/locale'
 export default {
-  props: ["dataComments"],
+  
   data() {
     return {
       form: {
         body: "",
-        author: ""
+        author: "",
+        url: window.location.href,
       },
       errors: {},
-      comments: this.dataComments
+      comments: []
     };
   },
   mounted() {
-    
+    axios.get('/comments/'+btoa(window.location.href))
+    .then(({data}) => {
+      this.comments = data
+    })
   },
   methods: {
     submitComment() {
@@ -58,10 +60,14 @@ export default {
           this.comments.push(data);
           this.errors = "";
           this.form.body = "";
+          this.form.author = "";
         })
         .catch(error => {
           this.errors = error.response.data.errors;
         });
+    },
+    format(date){
+      return formatDistance(new Date(date), new Date(), {locale: fr})
     }
   }
 };
