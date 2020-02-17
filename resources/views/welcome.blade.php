@@ -16,7 +16,7 @@
     <body>
         <div id="app" class="d-flex justify-content-center">
         <h1>{{ $title }}</h1>
-        <comment-form></comment-form>
+        <comment></comment>
            
         </div>
         <script src="/js/app.js"></script>
