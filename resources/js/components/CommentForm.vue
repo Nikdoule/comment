@@ -50,10 +50,12 @@ export default {
             axios
                 .post("/comments", this.form)
                 .then(({ data }) => {
+                    console.log(data)
                     this.$emit('newComment', data)
                     this.errors = "";
                     this.form.body = "";
                     this.form.author = "";
+                    
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;

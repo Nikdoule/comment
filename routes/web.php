@@ -18,3 +18,7 @@ Route::get('/page2', 'PageController@page2');
 Route::get('/comments/{url}', 'CommentsController@index');
 
 Route::post('/comments', 'CommentsController@store');
+
+Route::get('/replies/{url}', 'CommentsController@indexReply');
+
+Route::post('/replies', 'CommentsController@repliesStore');

@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('comment', require('./components/Comment.vue').default);
 Vue.component('comment-form', require('./components/CommentForm.vue').default);
+Vue.component('replies-form', require('./components/RepliesForm.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
